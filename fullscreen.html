@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kaart in Fullscreen</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+    }
+    #fullscreen-btn {
+      padding: 10px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 10;
+    }
+    .container {
+      position: relative;
+      height: 100vh;
+    }
+    .map {
+      height: 100%;
+      background-color: lightgray;
+      /* Voeg hier je kaartstijl toe */
+    }
+  </style>
+</head>
+<body>
+  <button id="fullscreen-btn">Volledig scherm</button>
+  <div class="container">
+    <img id="img1" src="https://i.imgur.com/X0HjZch.jpeg" style="width: 100%; display: block;">
+    <img id="img2" src="https://i.imgur.com/J0mp3da.jpeg" style="position: absolute; top: 0; left: 0; width: 100%; opacity: 1;">
+  </div>
+
+  <script>
+    document.getElementById('fullscreen-btn').addEventListener('click', function() {
+      if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
+        enterFullscreen();
+      } else {
+        exitFullscreen();
+      }
+    });
+
+    function enterFullscreen() {
+      const element = document.documentElement;
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+      } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+      } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+      }
+    }
+
+    function exitFullscreen() {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+    }
+  </script>
+</body>
+</html>
